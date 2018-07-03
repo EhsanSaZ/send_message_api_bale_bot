@@ -1,0 +1,2 @@
+class ReceiverType:
+    id = "id"
