@@ -13,8 +13,6 @@ server_notification_queue = queue.Queue()
 client_notification_queue = queue.Queue()
 app = Flask(__name__)
 app.debug = False
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.secret_key = NotificationConfig.flask_app_secret_key
 logger = NotificationLogger.get_logger()
 
 

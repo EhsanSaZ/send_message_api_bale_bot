@@ -19,7 +19,6 @@ class SMNotificationChecker(NotificationChecker):
             a_notification = notification_sender.notification_queue.get(False)  # doesn't block
         except queue.Empty:  # raised when queue is empty
             a_notification = None
-
         if a_notification:
             try:
                 if isinstance(a_notification, TextMessageNotification):

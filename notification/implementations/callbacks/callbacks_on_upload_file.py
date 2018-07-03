@@ -1,6 +1,3 @@
-from datetime import datetime
-
-from notification.constants.receiver_type_enum import ReceiverType
 from notification.implementations.callbacks.callbacks_on_send_messages import *
 
 
@@ -30,5 +27,13 @@ def file_upload_success(result, user_data):
 
 
 def file_upload_failure(response, user_data):
-    print(response)
-    print(user_data)
+    notification = user_data['kwargs']['notification']
+    logger = user_data['kwargs']['logger']
+    ack_queue = user_data['kwargs']['ack_queue']
+    ack = AckNotification(description_code=response.body.code, description_tag=response.body.tag,
+                          notification_number=notification.notification_number,
+                          success_flag=False)
+    ack_queue.put(ack)
+    logger.error(
+        "failed to upload file for notification {}in file_upload_failure at : {}".format(
+            notification.get_json_obj(), datetime.now()))
